@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <style>
+        #tac{
+            margin-top: 30px;
+            margin: auto;
+        }
+        #tac td{
+            text-align: center;
+            height: 50px;
+            width: 50px;
+            border: 1px solid black;
+            background-color: aqua;
+        }
+        button{
+            text-align: center;
+            margin: auto;
+            /* background-color: blue; */
+            border-radius: 5px;
+            background-color: beige;
+        }
+        #main{
+            text-align: center;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+<div id="main">
+    <table id="tac">
+        <tr>
+            <td onclick="mark (this)"></td>
+            <td onclick="mark (this)"></td>
+            <td onclick="mark (this)"></td>
+        </tr>
+        <tr>
+            <td onclick="mark (this)"></td>
+            <td onclick="mark (this)"></td>
+            <td onclick="mark (this)"></td>
+        </tr>
+        <tr>
+            <td onclick="mark (this)"></td>
+            <td onclick="mark (this)"></td>
+            <td onclick="mark (this)"></td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <button onclick="restart ()">RESTART</button>
+</div>
+    <script>
+        let sym = '*'
+        function mark(ele){
+            ele.innerHTML = sym
+            if ( sym == '*'){
+                sym = 'o'
+            }
+            else{
+                sym = '*'
+            }
+            let tds = document.querySelectorAll('#tac td')
+            if(
+                ( tds[0].innerHTML == '*' && tds[1].innerHTML == '*' && tds[2].innerHTML == '*') ||
+                ( tds[3].innerHTML == '*' && tds[4].innerHTML == '*' && tds[5].innerHTML == '*') ||
+                ( tds[6].innerHTML == '*' && tds[7].innerHTML == '*' && tds[8].innerHTML == '*') ||
+                ( tds[0].innerHTML == '*' && tds[4].innerHTML == '*' && tds[8].innerHTML == '*') ||
+                ( tds[2].innerHTML == '*' && tds[4].innerHTML == '*' && tds[6].innerHTML == '*')
+                ){
+
+                alert('*** wins')
+                restart()
+            }
+            else if(
+                ( tds[0].innerHTML == 'o' && tds[1].innerHTML == 'o' && tds[2].innerHTML == 'o') ||
+                ( tds[3].innerHTML == 'o' && tds[4].innerHTML == 'o' && tds[5].innerHTML == 'o') ||
+                ( tds[6].innerHTML == 'o' && tds[7].innerHTML == 'o' && tds[8].innerHTML == 'o') ||
+                ( tds[0].innerHTML == 'o' && tds[4].innerHTML == 'o' && tds[8].innerHTML == 'o') ||
+                ( tds[2].innerHTML == 'o' && tds[4].innerHTML == 'o' && tds[6].innerHTML == 'o')
+                ){
+                alert('o wins')
+                restart()
+            }
+        }
+        function restart(){
+            let tdm = document.querySelectorAll('#tac td')
+            for(let td of tdm){
+                    td.innerHTML = ''
+                }
+        }
+    </script>
+</body>
+{% endblock %}
